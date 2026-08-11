@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Automated Report Insights</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .insight-box {
+            background: #f8f9fa;
+            border-left: 5px solid #0d6efd;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+        }
+        .chart-img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .score-badge {
+            font-size: 20px;
+            padding: 10px 16px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-4 mb-5">
+
+    <h2 class="text-center mb-4">📊 Automated File Insight Report</h2>
+
+    {% if result.type == 'docx' %}
+
+        <!-- DOCX INSIGHTS CARD -->
+        <div class="card p-4 shadow-sm mb-4">
+            <h5 class="mb-3">📄 Document Analysis Summary</h5>
+            <p><strong>Word Count:</strong> {{ result.word_count }}</p>
+            <p><strong>Sentiment Polarity:</strong> {{ result.sentiment_polarity }}</p>
+            <p><strong>Subjectivity:</strong> {{ result.sentiment_subjectivity }}</p>
+            <p><strong>Auto Summary:</strong></p>
+            <div class="alert alert-secondary">{{ result.summary }}</div>
+        </div>
+
+        {% if result.wordcloud_path %}
+            <div class="text-center">
+                <h5 class="mb-3">☁ Word Cloud Visualization</h5>
+                <img src="{{ url_for('static', filename='charts/wordcloud.png') }}" class="chart-img" style="max-width: 650px;">
+            </div>
+        {% endif %}
+
+    {% elif result.type == 'csv' %}
+
+        <!-- BASIC FILE INFO -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm text-center">
+                    <h6>📄 Dataset Info</h6>
+                    <p><strong>Rows:</strong> {{ result.rows }}</p>
+                    <p><strong>Columns:</strong> {{ result.cols }}</p>
+                </div>
+            </div>
+
+            <!-- DATA QUALITY SCORE -->
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm text-center">
+                    <h6>✅ Data Quality Score</h6>
+                    <span class="badge bg-success score-badge">{{ result.quality_score }} / 100</span>
+                    <p class="mt-2 small text-muted">Based on missing values & duplicates</p>
+                </div>
+            </div>
+
+            <!-- MISSING VALUES -->
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm">
+                    <h6>⚠ Missing Values</h6>
+                    <ul class="mb-0 small">
+                        {% for col, val in result.missing_values.items() %}
+                            <li>{{ col }} : {{ val }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DATA SUMMARY -->
+        <div class="card p-3 shadow-sm mb-4">
+            <h5 class="mb-3">📈 Statistical Data Summary</h5>
+            <div class="table-responsive">
+                {{ result.description_html | safe }}
+            </div>
+        </div>
+
+        <!-- DATA PREVIEW -->
+        <div class="card p-3 shadow-sm mb-4">
+            <h5 class="mb-3">🔍 Dataset Preview</h5>
+            <div class="table-responsive">
+                {{ result.preview_html | safe }}
+            </div>
+        </div>
+
+        <!-- AI INSIGHTS -->
+        <div class="card p-3 shadow-sm mb-4">
+            <h5 class="mb-3">🧠 AI-Generated Insights</h5>
+            {% for insight in result.insights %}
+                <div class="insight-box">• {{ insight }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- AUTO-GENERATED CHARTS -->
+        <div class="card p-3 shadow-sm">
+            <h5 class="mb-4 text-center">📊 Auto-Generated Visualizations</h5>
+
+            <div class="row">
+                {% for chart in result.charts %}
+                    <div class="col-md-6 text-center">
+                        <img src="{{ url_for('static', filename='charts/' + chart.split('/')[-1]) }}" class="chart-img">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endif %}
+
+    <!-- ACTION BUTTONS -->
+    <div class="text-center mt-5">
+        <a href="/download/{{ filename }}" class="btn btn-success btn-lg m-2">📥 Download PDF Report</a>
+        <a href="/" class="btn btn-secondary btn-lg m-2">⬅ Upload Another File</a>
+    </div>
+
+</div>
+
+</body>
+</html>
