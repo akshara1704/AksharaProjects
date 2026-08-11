@@ -1,0 +1,8 @@
+Flask
+pandas
+python-docx
+textblob
+matplotlib
+seaborn
+wordcloud
+reportlab
