@@ -1,0 +1,26 @@
+{
+  "technical": [
+    "What is the difference between a stack and a queue?",
+    "Explain polymorphism in OOP.",
+    "What is a REST API?",
+    "Describe the concept of Big O notation.",
+    "What is the difference between SQL and NoSQL databases?",
+    "Explain the concept of inheritance in Object-Oriented Programming.",
+    "What is a lambda function in Python?",
+    "How does the DNS (Domain Name System) work?",
+    "What is the difference between an interface and an abstract class?",
+    "What is multithreading, and how does it differ from multiprocessing?"
+  ],
+  "behavioral": [
+    "Tell me about a time when you overcame a challenge at work.",
+    "How do you handle stress in a project?",
+    "Where do you see yourself in 5 years?",
+    "Tell me about a time when you worked in a team.",
+    "What is your greatest achievement?",
+    "Tell me about a time you made a mistake at work and how you handled it.",
+    "How do you prioritize tasks when dealing with multiple deadlines?",
+    "Describe a situation when you had to learn something new quickly.",
+    "Tell me about a time you resolved a conflict in the workplace.",
+    "What motivates you in your career?"
+  ]
+}
