@@ -1,0 +1,76 @@
+<!-- Store this code in 'register.html' file inside the 'templates' folder -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <style>
+        .toggle-password {
+            cursor: pointer;
+            margin-left: -30px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="registercontent" align="center">
+        <div class="registertop">
+            <h1>Register</h1>
+        </div>
+        <div class="registerbottom">
+            <form action="{{ url_for('register') }}" method="post" autocomplete="off">
+                <div class="msg">{{ msg }}</div>
+
+                <input type="text" name="username" placeholder="Enter Your Username" class="textbox" id="username" required>
+                <br><br>
+
+                <input type="password" name="password" placeholder="Enter Your Password" class="textbox" id="password" required>
+                <span class="toggle-password" onclick="togglePasswordVisibility()">
+                    👁️
+                </span>
+                <br><br>
+
+                <input type="email" name="email" placeholder="Enter Your Email ID" class="textbox" id="email" required>
+                <br><br>
+
+                <input type="text" name="organisation" placeholder="Enter Your Organisation" class="textbox" id="organisation" required>
+                <br><br>
+
+                <input type="text" name="address" placeholder="Enter Your Address" class="textbox" id="address" required>
+                <br><br>
+
+                <input type="text" name="city" placeholder="Enter Your City" class="textbox" id="city" required>
+                <br><br>
+
+                <input type="text" name="state" placeholder="Enter Your State" class="textbox" id="state" required>
+                <br><br>
+
+                <input type="text" name="country" placeholder="Enter Your Country" class="textbox" id="country" required>
+                <br><br>
+
+                <input type="text" name="postalcode" placeholder="Enter Your Postal Code" class="textbox" id="postalcode" required>
+                <br><br>
+
+                <input type="submit" class="btn" value="Register">
+            </form>
+            <p class="worddark">Already have an account? <a class="worddark" href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = '😎'; // Change icon to indicate password is visible
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = '👁️'; // Change icon back to indicate password is hidden
+            }
+        }
+    </script>
+</body>
+</html>
