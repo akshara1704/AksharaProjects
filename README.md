@@ -62,6 +62,8 @@ AksharaProjects/
 
 These projects demonstrate practical experience in **Python development, web application development, browser automation, database integration, and AI-powered application development**.
 
-## 🔗 GitHub
+## 🔗 Linkedin
+https://www.linkedin.com/in/akshara-shrivastava-cse/
 
+## 🔗 GitHub
 This repository contains the source code and development work for the projects listed above.
